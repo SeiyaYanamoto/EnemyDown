@@ -23,3 +23,12 @@
 ４．ゲーム終了後、点数が表示され、データベースに保存されます。
 
 ５．/enemydown listとコマンドを入力すると、過去のスコアを確認できます。
+
+## プレイ動画（easyバージョン）
+
+https://github.com/user-attachments/assets/f094814b-504c-448e-961d-247d6fc5ad68
+
+
+
+
+
