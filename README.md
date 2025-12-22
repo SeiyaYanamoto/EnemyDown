@@ -26,7 +26,25 @@
 
 ## プレイ動画（easyバージョン）
 
-https://github.com/user-attachments/assets/f094814b-504c-448e-961d-247d6fc5ad68
+https://github.com/user-attachments/assets/8306c341-ac6a-41e8-b156-d9f6bd90c244
+
+## スコア確認動画
+
+https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
