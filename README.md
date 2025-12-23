@@ -33,24 +33,8 @@ https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 
 https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## データベース設計　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+|属性　　　　 |設定値　　　 |
+|-----|-----|
+| データベース名 | spigot_server |
+| テーブル名 | player_score | 
