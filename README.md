@@ -38,3 +38,12 @@ https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 |-----|-----|
 | データベース名 | spigot_server |
 | テーブル名 | player_score | 
+
+## データベース構成
+|カラム名　　　　 |説明　　 |
+|-----|-----|
+| id | 主キー、自動採番 |
+| player_name | プレイヤー名 |
+| score | 倒した敵の得点 |
+| difficulty | 難易度 | 
+| registered_at | 登録日時 | 
