@@ -106,4 +106,4 @@ https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
 ## おわりに
 * Java学習者のアウトプットして、リポジトリ公開させていただきました。
-* 感想・コメント等あればXアカウントまでご連絡くださると幸いです。
+* 感想・コメント等あればXアカウント[@Seiya_engineer]( https://x.gd/daily_study)までご連絡くださると幸いです。
