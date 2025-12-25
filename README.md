@@ -28,6 +28,45 @@
 
 https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 
+**難易度が上がるにつれて出現する敵の種類が増え、増えた種類の敵はランダムで出現するようにした。**
+- easyはゾンビのみ、normalはゾンビとスケルトン、hardはゾンビ・スケルトン・魔女が出現する。
+```java
+  private EntityType getEnemy(String difficulty) {
+    List<EntityType> enemyList = switch (difficulty) {
+      case NORMAL -> List.of(EntityType.ZOMBIE, EntityType.SKELETON);
+      case HARD -> List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.WITCH);
+      default -> List.of(EntityType.ZOMBIE);
+    };
+    return enemyList.get(new SplittableRandom().nextInt(enemyList.size()));
+  }
+```
+
+**倒された敵とそれを倒したプレイヤーを取得し、対象リストの敵であればプレイヤーのスコアを敵の種類に応じて加算する。**
+```java
+  @EventHandler
+  public void onEnemyDeath(EntityDeathEvent e) {
+    LivingEntity enemy = e.getEntity();
+    Player player = enemy.getKiller();
+
+    if (Objects.isNull(player) || spowEntityList.stream().noneMatch(entity -> entity.equals(enemy))) {
+      return;
+    }
+
+    executingPlayerList.stream()
+        .filter(p -> p.getPlayerName().equals(player.getName()))
+        .findFirst()
+        .ifPresent(p -> {
+          int point = switch (enemy.getType()) {
+            case ZOMBIE -> 10;
+            case SKELETON, WITCH -> 20;
+            default -> 0;
+          };
+
+          p.setScore(p.getScore()+ point);
+          player.sendMessage("敵を倒した！現在のスコアは" + p.getScore() + "点！");
+        });
+  }
+```
 
 ## スコア確認動画
 
@@ -47,17 +86,6 @@ https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 | score | 倒した敵の得点 |
 | difficulty | 難易度 | 
 | registered_at | 登録日時 | 
-
-## 工夫したところ
-**難易度によって敵の種類と得点を変更し、normal、hardではランダムで敵が出現するようにした。**
-- easyはゾンビのみ、normalはゾンビとスケルトン、hardはゾンビ・スケルトン・魔女が出現する設定。
-- 難易度に伴い、スケルトンと魔女を倒すと得点が20点加算されるようにした。
-
-
-- normal、hardではランダムに敵が出現するように設定をおこなった。
-  
-**可読性を意識したコード設計**
-- 各イベントごとにリファクタリングを行い、処理を適切に整理した。さらに、コードの意図が伝わるよう Javadoc でコメントを残し、全体の理解しやすさを向上させた。
 
 ## 今後実装予定の機能
 - コマンド入力時に設定エリアでゲームをプレイし、終了時に元の場所に戻るようにする。
