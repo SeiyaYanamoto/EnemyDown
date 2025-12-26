@@ -60,25 +60,14 @@ https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
 ```mermaid
 erDiagram
-    Player ||--o{ PlayerScore : "1人のプレイヤーは複数の<br>スコアを持つことができる"
-
-    Player {
-        int player_id PK "内部ID"
-        string uuid UK "Minecraft UUID（識別子）"
-        string player_name "現在の表示名"
-        datetime registered_at "プレイ日時（登録時刻）"
-    }
-
     PlayerScore {
-        int score_id PK "スコアID"
-        int player_id FK "プレイヤーID"
-        int difficulty_id "難易度"
+        int id PK "主キー、自動採番"
+        string player_name "プレイヤー名"
+        string difficulty "難易度"
         int score "獲得スコア"
         datetime registered_at "プレイ日時（登録時刻）"
     }
 ```
-
-※ 本設計における Player は、Minecraft サーバー上で識別されるプレイヤーを指します。
 
 ## データベース処理の流れ
 ```mermaid
@@ -86,7 +75,7 @@ flowchart TD
     A[ゲーム内イベント] --> B[PlayerScore<br>【エンティティ生成】]
     B --> C[PlayerScoreData.insert<br>【DB操作の窓口】]
     C --> D[PlayerScoreMapper.insert<br>【SQL実行】]
-    D --> E[PlayerScore<br>【テーブルに保存】]
+    D --> E[player_score<br>【テーブルに保存】]
 ```
 
 ### ① Entity：PlayerScore<br>
@@ -153,7 +142,6 @@ public interface PlayerScoreMapper {
   )
   void insert(PlayerScore playerScore);
 }
-
 ```
 
 
