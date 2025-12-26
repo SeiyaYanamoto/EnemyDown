@@ -72,20 +72,29 @@ https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 
 https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
-## データベース設計　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
-|属性　　　　 |設定値　　　 |
-|-----|-----|
-| データベース名 | spigot_server |
-| テーブル名 | player_score | 
+## データベース設計（ER図）
 
-## データベース構成
-|カラム名　　　　 |説明　　 |
-|-----|-----|
-| id | 主キー、自動採番 |
-| player_name | プレイヤー名 |
-| score | 倒した敵の得点 |
-| difficulty | 難易度 | 
-| registered_at | 登録日時 | 
+```mermaid
+erDiagram
+    Player ||--o{ PlayScore : "1人のプレイヤーは複数の<br>スコアを持つことができる"
+
+    Player {
+        int player_id PK "内部ID"
+        string uuid UK "Minecraft UUID（識別子）"
+        string player_name "現在の表示名"
+        datetime registered_at "プレイ日時（登録時刻）"
+    }
+
+    PlayScore {
+        int score_id PK "スコアID"
+        int player_id FK "プレイヤーID"
+        int difficulty_id "難易度"
+        int score "獲得スコア"
+        datetime registered_at "プレイ日時（登録時刻）"
+    }
+```
+
+※ 本設計における Player は、Minecraft サーバー上で識別されるプレイヤーを指します。
 
 ## 今後実装予定の機能
 - コマンド入力時に設定エリアでゲームをプレイし、終了時に元の場所に戻るようにする。
