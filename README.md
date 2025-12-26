@@ -60,7 +60,7 @@ https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
 ```mermaid
 erDiagram
-    Player ||--o{ PlayScore : "1人のプレイヤーは複数の<br>スコアを持つことができる"
+    Player ||--o{ PlayerScore : "1人のプレイヤーは複数の<br>スコアを持つことができる"
 
     Player {
         int player_id PK "内部ID"
@@ -69,7 +69,7 @@ erDiagram
         datetime registered_at "プレイ日時（登録時刻）"
     }
 
-    PlayScore {
+    PlayerScore {
         int score_id PK "スコアID"
         int player_id FK "プレイヤーID"
         int difficulty_id "難易度"
@@ -79,6 +79,83 @@ erDiagram
 ```
 
 ※ 本設計における Player は、Minecraft サーバー上で識別されるプレイヤーを指します。
+
+## データベース処理の流れ
+```mermaid
+flowchart TD
+    A[ゲーム内イベント] --> B[PlayerScore<br>【エンティティ生成】]
+    B --> C[PlayerScoreData.insert<br>【DB操作の窓口】]
+    C --> D[PlayerScoreMapper.insert<br>【SQL実行】]
+    D --> E[PlayerScore<br>【テーブルに保存】]
+```
+
+### ① Entity：PlayerScore<br>
+DBレコードを表すデータクラス
+```java
+@Getter
+@Setter
+@NoArgsConstructor
+public class PlayerScore {
+
+  private int id;
+  private String playerName;
+  private int score;
+  private String difficulty;
+  private LocalDateTime registeredAt;
+
+  public PlayerScore(String playerName, int score, String difficulty) {
+    this.playerName = playerName;
+    this.score = score;
+    this.difficulty = difficulty;
+  }
+}
+```
+
+### ② Dataクラス：PlayerScoreData
+DB接続と操作を集約する窓口
+```java
+public class PlayerScoreData {
+
+  private SqlSessionFactory sqlSessionFactory;
+  private PlayerScoreMapper mapper;
+
+  public PlayerScoreData() {
+    InputStream inputStream =
+        Resources.getResourceAsStream("mybatis-config.xml");
+    this.sqlSessionFactory =
+        new SqlSessionFactoryBuilder().build(inputStream);
+
+    SqlSession session = sqlSessionFactory.openSession(true);
+    this.mapper = session.getMapper(PlayerScoreMapper.class);
+  }
+
+  public List<PlayerScore> selectList() {
+    return mapper.selectList();
+  }
+
+  public void insert(PlayerScore playerScore) {
+    mapper.insert(playerScore);
+  }
+}
+```
+
+### ③ Mapper：PlayerScoreMapper<br>
+SQLを定義するインターフェース
+```java
+public interface PlayerScoreMapper {
+
+  @Select("select * from player_score")
+  List<PlayerScore> selectList();
+
+  @Insert(
+    "insert player_score(player_name, score, difficulty, registered_at) " +
+    "values (#{playerName}, #{score}, #{difficulty}, now())"
+  )
+  void insert(PlayerScore playerScore);
+}
+
+```
+
 
 ## 今後実装予定の機能
 - コマンド入力時に設定エリアでゲームをプレイし、終了時に元の場所に戻るようにする。
