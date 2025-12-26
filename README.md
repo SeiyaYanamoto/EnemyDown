@@ -79,7 +79,7 @@ flowchart TD
 ```
 
 ### ① Entity：PlayerScore<br>
-DBレコードを表すデータクラス
+プレイヤーのスコア情報をまとめて持つためのデータクラス
 ```java
 @Getter
 @Setter
@@ -101,7 +101,7 @@ public class PlayerScore {
 ```
 
 ### ② Dataクラス：PlayerScoreData
-DB接続と操作を集約する窓口
+PlayerScore をデータベースから取得・登録するための専用クラス
 ```java
 public class PlayerScoreData {
 
@@ -129,7 +129,7 @@ public class PlayerScoreData {
 ```
 
 ### ③ Mapper：PlayerScoreMapper<br>
-SQLを定義するインターフェース
+PlayerScoreテーブルを操作するSQLをJavaのメソッドとして定義するインターフェース
 ```java
 public interface PlayerScoreMapper {
 
