@@ -63,8 +63,8 @@ erDiagram
     PlayerScore {
         int id PK "主キー、自動採番"
         string player_name "プレイヤー名"
-        string difficulty "難易度"
         int score "獲得スコア"
+        string difficulty "難易度"
         datetime registered_at "プレイ日時（登録時刻）"
     }
 ```
