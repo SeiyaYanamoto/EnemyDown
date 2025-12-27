@@ -73,8 +73,8 @@ erDiagram
 ```mermaid
 flowchart TD
     A[ゲーム内イベント] --> B[PlayerScore<br>【エンティティ生成】]
-    B --> C[PlayerScoreData.insert<br>【DB操作の窓口】]
-    C --> D[PlayerScoreMapper.insert<br>【SQL実行】]
+    B --> C[PlayerScoreData<br>【DB操作の窓口】]
+    C --> D[PlayerScoreMapper<br>【SQL実行】]
     D --> E[player_score<br>【テーブルに保存】]
 ```
 
