@@ -67,6 +67,7 @@ https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 ```
 
 ## スコア確認動画
+***`/enemydown list` コマンドを通じて、データベースに保存された過去のプレイスコアをゲーム内で確認できるようにしています。***
 
 https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
