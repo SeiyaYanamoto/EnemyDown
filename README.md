@@ -72,6 +72,7 @@ https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 https://github.com/user-attachments/assets/b3cefaac-8f26-4633-b169-9235c2e22d24
 
 ## データベース設計（ER図）
+***プレイごとのスコア履歴を管理することを目的とし、1プレイ＝1レコードとしてスコア情報を保存する設計としています。***
 
 ```mermaid
 erDiagram
