@@ -20,11 +20,13 @@
 
 
 ## プレイ動画（easyバージョン）
+***難易度に応じて出現する敵の種類を切り替え、各難易度内ではランダムに敵が出現する仕様としています。<br>
+この設計により、難易度ごとの差を保ちつつ、単調にならないゲーム体験を意識しました。***
 
 https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
 
-**難易度が上がるにつれて出現する敵の種類が増え、増えた種類の敵はランダムで出現するようにした。**
-- easyはゾンビのみ、normalはゾンビとスケルトン、hardはゾンビ・スケルトン・魔女が出現する。
+- 敵の出現ロジックは、難易度ごとにリストを定義し、その中からランダムで1体を選択する形にすることで、<br>
+  拡張しやすい構成としています。
 ```java
   private EntityType getEnemy(String difficulty) {
     List<EntityType> enemyList = switch (difficulty) {
@@ -36,7 +38,8 @@ https://github.com/user-attachments/assets/b56741cf-7af8-4597-b91f-425b6dd1e774
   }
 ```
 
-**倒された敵とそれを倒したプレイヤーを取得し、対象リストの敵であればプレイヤーのスコアを敵の種類に応じて加算する。**
+- 敵が倒されたタイミングで発生するイベントを検知し、特定の敵のみをスコア加算対象として判定する処理を実装しています。<br>
+また、敵の種類ごとに獲得ポイントを分けることで、倒した敵によってスコアに変化が生まれるようにしています。
 ```java
   @EventHandler
   public void onEnemyDeath(EntityDeathEvent e) {
