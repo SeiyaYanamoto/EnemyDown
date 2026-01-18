@@ -13,8 +13,7 @@
 | 使用ツール |![badge](https://img.shields.io/badge/GitHub-181717.svg?style=plastic&logo=github)&nbsp;![badge](https://img.shields.io/badge/MyBatis-3.5.19-grey.svg?style=plastic&labelColor=DD0700)&nbsp;![badge](https://img.shields.io/badge/intellij%20IDEA-2025.2.3-grey.svg?style=plastic&logo=intellijidea&labelColor=000000)| 
 
 ## 制作背景
-- Java およびデータベースを用いたバックエンド処理を設計・実装する題材として、  処理結果を視覚的に確認しやすい<br>
-  Minecraft プラグインを選定しました。
+- Java およびデータベースを用いたバックエンド処理を設計・実装する題材として、  処理結果を視覚的に確認しやすいMinecraft プラグインを選定しました。
 
 - Spigot API を用い、ゲーム内イベントを起点とした処理フローと、  スコア情報を管理するシステムを設計・実装しています。
 
